@@ -52,7 +52,7 @@ const Main = (props) => {
               boxSizing: "border-box",
               border: "none",
               width: { xs: "100%", sm: 350 },
-              bgcolor: image ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)",
+              bgcolor: { xs: "rgba(0,0,0,1)",  sm: image ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)" },
             },
           }}
         >
@@ -69,7 +69,7 @@ const Main = (props) => {
               boxSizing: "border-box",
               border: "none",
               width: drawerWidth,
-              bgcolor: image ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)",
+              bgcolor: { xs: "rgba(0,0,0,1)",  sm: image ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)" },
             },
           }}
         >

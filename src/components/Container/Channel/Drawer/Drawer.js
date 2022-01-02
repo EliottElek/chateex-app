@@ -31,7 +31,7 @@ import getBase64 from "../../../../functions/dist/base64";
 import shortString from "../../../../functions/string";
 const styles = {
   root: {
-    background: "transparent",
+    background: "transparent!important",
     width: "95%",
     padding: 0,
     margin: "1px auto 1px auto",
@@ -287,7 +287,7 @@ export default function SwipeableTemporaryDrawer({
     <Box
       sx={{
         color: "#fefefe",
-        bgcolor: "transparent",
+        bgcolor: "rgba(0,0,0,0.8)",
         flexGrow: 1,
         overflowY: "scroll",
         width: { xs: "100%", sm: 350 },
