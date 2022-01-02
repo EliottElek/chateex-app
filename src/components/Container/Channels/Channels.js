@@ -49,6 +49,11 @@ const styles = {
     color: "#fefefe",
     borderBottom: "solid 0.2px rgb(66, 69, 74)",
   },
+  channelsLoading: {
+    margin:0,
+    height : "60px",
+    color: "#fefefe",
+  },
   add: {
     color: "#fefefe",
     width: "20px",
@@ -133,7 +138,9 @@ const Channels = () => {
   };
   const fetchUsers = async () => {
     try {
-      const { data: usrs } = await axios.get(`${process.env.REACT_APP_API_URL}/users`);
+      const { data: usrs } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users`
+      );
       var usersFiltered = usrs.filter(function (u) {
         return u.id !== user.id;
       });
@@ -302,17 +309,27 @@ const Channels = () => {
           <AddIcon style={styles.add} />
         </IconButton>
       </ListItem>
-      <List sx={styles.listChannels}>
-        {channels?.map((channel) => (
-          <>
-            {channel.unread ? (
-              <ChannelItem key={channel.id} channel={channel} unread />
-            ) : (
-              <ChannelItem key={channel.id + 1} channel={channel} />
-            )}
-          </>
-        ))}
-      </List>
+      {!channels.length ? (
+        <ListItem
+          sx={styles.channelsLoading}
+          key="channelsLoading"
+          secondaryAction={<CircularProgress style={{width:30, height : 30}}/>}
+        >
+          <Typography>Loading...</Typography>
+        </ListItem>
+      ) : (
+        <List sx={styles.listChannels}>
+          {channels?.map((channel, i) => (
+            <div key={i}>
+              {channel.unread ? (
+                <ChannelItem key={channel.id} channel={channel} unread />
+              ) : (
+                <ChannelItem key={channel.id + 1} channel={channel} />
+              )}
+            </div>
+          ))}
+        </List>
+      )}
       <Modal handleClose={handleCloseModal} open={open}>
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>

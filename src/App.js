@@ -289,15 +289,11 @@ const App = () => {
 };
 
 function RequireAuth({ children }) {
-  let { user, cookies } = useContext(Context);
+  let { user } = useContext(Context);
   let location = useLocation();
 
-  if (!user && cookies.visited) {
+  if (!user) {
     return <Navigate to="/login" state={{ from: location }} />;
-  }
-
-  if (!user && !cookies.visited) {
-    return <Navigate to="/landing" state={{ from: location }} />;
   }
   return children;
 }
