@@ -60,7 +60,7 @@ const Channel = ({ handleDrawerToggle }) => {
     const fetchMembers = async () => {
       try {
         const { data: usrs } = await axios.get(
-          `http://localhost:3001/users/getmembers/${id}`
+          `${process.env.REACT_APP_API_URL}/users/getmembers/${id}`
         );
         setMembers(usrs);
       } catch (err) {

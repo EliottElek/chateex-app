@@ -63,7 +63,7 @@ export default function MemberItem({ member, index, setOpenDrawer }) {
         return u !== chId;
       });
       newUser.channelsList = newList;
-      await axios.put(`http://localhost:3001/users/${newUser.id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/users/${newUser.id}`, {
         user: newUser,
       });
     } catch (e) {
@@ -80,7 +80,7 @@ export default function MemberItem({ member, index, setOpenDrawer }) {
         return u !== newUser.id;
       });
       channel.members = newUsersList;
-      await axios.put(`http://localhost:3001/channels/${chId}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/channels/${chId}`, {
         channel: channel,
       });
       setChannel(channel);

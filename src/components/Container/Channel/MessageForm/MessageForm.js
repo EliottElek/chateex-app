@@ -79,7 +79,7 @@ const MessageForm = () => {
             var today = getCurrentTime();
             try {
               const { data: message } = await axios.post(
-                `http://localhost:3001/channels/${channel.id}/messages`,
+                `${process.env.REACT_APP_API_URL}/channels/${channel.id}/messages`,
                 {
                   id: uuid(),
                   channelId: channel.id,
@@ -121,7 +121,7 @@ const MessageForm = () => {
     try {
       var today = getCurrentTime();
       const { data: message } = await axios.post(
-        `http://localhost:3001/channels/${channel.id}/messages`,
+        `${process.env.REACT_APP_API_URL}/channels/${channel.id}/messages`,
         {
           id: uuid(),
           channelId: channel.id,
@@ -170,7 +170,7 @@ const MessageForm = () => {
       e.preventDefault();
       try {
         const { data: message } = await axios.post(
-          `http://localhost:3001/channels/${channel.id}/messages`,
+          `${process.env.REACT_APP_API_URL}/channels/${channel.id}/messages`,
           {
             id: uuid(),
             channelId: channel.id,

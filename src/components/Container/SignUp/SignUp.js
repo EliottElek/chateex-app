@@ -225,13 +225,16 @@ const SignUp = () => {
         channelsList: [],
       };
       try {
-        const res = await axios.post(`http://localhost:3001/users`, userToAdd);
+        const res = await axios.post(
+          `${process.env.REACT_APP_API_URL}/users`,
+          userToAdd
+        );
         console.log(res);
         if (res.data.create === false) {
           setEmptyEmailMessage(res.data.message);
         } else {
           setEmptyEmailMessage("all good");
-          console.log(res.data.user.email)
+          console.log(res.data.user.email);
           setCookie("oauth", {
             openid: false,
             id_token: res.data.token,

@@ -118,7 +118,7 @@ const AppBar = ({ handleDrawerToggle }) => {
   }
   const fetchUsers = async () => {
     try {
-      const { data: usrs } = await axios.get("http://localhost:3001/users");
+      const { data: usrs } = await axios.get(`${process.env.REACT_APP_API_URL}/users`);
       var usersFiltered = usrs.filter(function (u) {
         return u.id !== user.id;
       });
@@ -134,7 +134,7 @@ const AppBar = ({ handleDrawerToggle }) => {
       const selectedMembersIds = selectedMembers.map((a) => a.id);
       addMembers([...channel.members, selectedMembersIds]);
       setMembers([...members, selectedMembers]);
-      await axios.put(`http://localhost:3001/channels/${channel.id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/channels/${channel.id}`, {
         channel: channel,
       });
     } catch (err) {
@@ -144,7 +144,7 @@ const AppBar = ({ handleDrawerToggle }) => {
       try {
         selectedMembers[i].channelsList.push(channel.id);
         await axios.put(
-          `http://localhost:3001/users/${selectedMembers[i].id}`,
+          `${process.env.REACT_APP_API_URL}/users/${selectedMembers[i].id}`,
           {
             user: selectedMembers[i],
           }

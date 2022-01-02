@@ -122,7 +122,7 @@ export default function SwipeableTemporaryDrawer({
   const handleDeleteChannelAdmin = async () => {
     const chId = channel.id;
     try {
-      await axios.delete(`http://localhost:3001/channels/${chId}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/channels/${chId}`);
       removeChannel(channel);
       setCookie("channels", channels);
     } catch (err) {
@@ -135,7 +135,7 @@ export default function SwipeableTemporaryDrawer({
       const newChannelsIds = channels.map((channel) => channel.id);
       newUser.channelsList = newChannelsIds;
 
-      await axios.put(`http://localhost:3001/users/${user.id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, {
         user: newUser,
       });
       setSnackBarMessage({
@@ -157,7 +157,7 @@ export default function SwipeableTemporaryDrawer({
           return u !== channel.id;
         });
         newUser.channelsList = newList;
-        await axios.put(`http://localhost:3001/users/${newUser.id}`, {
+        await axios.put(`${process.env.REACT_APP_API_URL}/users/${newUser.id}`, {
           user: newUser,
         });
         console.log(
@@ -205,7 +205,7 @@ export default function SwipeableTemporaryDrawer({
     try {
       if (file) channel.avatarUrl = file;
       channel.name = name;
-      await axios.put(`http://localhost:3001/channels/${channel.id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/channels/${channel.id}`, {
         channel: channel,
       });
       setChannel(channel);
@@ -232,7 +232,7 @@ export default function SwipeableTemporaryDrawer({
         return u !== chId;
       });
       newUser.channelsList = newList;
-      await axios.put(`http://localhost:3001/users/${newUser.id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/users/${newUser.id}`, {
         user: newUser,
       });
       onUser(newUser);
@@ -251,7 +251,7 @@ export default function SwipeableTemporaryDrawer({
         return u !== newUser.id;
       });
       channel.members = newUsersList;
-      await axios.put(`http://localhost:3001/channels/${chId}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/channels/${chId}`, {
         channel: channel,
       });
       removeChannel(channel);

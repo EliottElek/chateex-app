@@ -57,7 +57,7 @@ export const ContextProvider = ({ children }) => {
               oauth.name = payload.name;
             }
             const data = await axios.post(
-              `http://localhost:3001/users/email/${oauth.email}`,
+              `${process.env.REACT_APP_API_URL}/users/email/${oauth.email}`,
               {
                 user: {
                   id: uuid(),

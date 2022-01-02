@@ -34,7 +34,7 @@ if (!link) {
 link.href = icon;
 
 let socket;
-const ENDPOINT = "localhost:3001";
+const ENDPOINT = process.env.REACT_APP_API_URL;
 
 const styles = {
   root: {
@@ -78,13 +78,13 @@ const App = () => {
     openSnack,
     handleCloseSnack,
     setChannel,
-    removeCookie
+    removeCookie,
   } = useContext(Context);
   useEffect(() => {
     const fetchMessages = async () => {
       try {
         const { data: msgs } = await axios.get(
-          `http://localhost:3001/channels/${channel?.id}/messages`
+          `${process.env.REACT_APP_API_URL}/channels/${channel?.id}/messages`
         );
         var sorted_messages = msgs.sort((a, b) => {
           return (
@@ -150,7 +150,7 @@ const App = () => {
       var channelTo = [];
       try {
         const { data: chanls } = await axios.post(
-          `http://localhost:3001/channels/find`,
+          `${process.env.REACT_APP_API_URL}/channels/find`,
           { user: user }
         );
         channelTo = chanls;
@@ -168,7 +168,7 @@ const App = () => {
           );
           try {
             const { data: usr } = await axios.get(
-              `http://localhost:3001/users/${otherUserId}`
+              `${process.env.REACT_APP_API_URL}/users/${otherUserId}`
             );
             channelTo[i].name = usr.firstname + " " + usr.lastname;
             channelTo[i].avatarUrl = usr.avatarUrl;
@@ -189,7 +189,7 @@ const App = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const data = await axios.get(
-        `http://localhost:3001/users/email/${oauth?.email}`
+        `${process.env.REACT_APP_API_URL}/users/email/${oauth?.email}`
       );
       if (!data.failed) {
         onUser(data.data);

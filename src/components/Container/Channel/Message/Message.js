@@ -167,7 +167,7 @@ const Message = ({ message, newUser }) => {
     e.preventDefault();
     try {
       const { data: mess } = await axios.put(
-        `http://localhost:3001/channels/${channel.id}/messages/${message.id}`,
+        `${process.env.REACT_APP_API_URL}/channels/${channel.id}/messages/${message.id}`,
         { content: newContent }
       );
       message.content = newContent;
@@ -210,7 +210,7 @@ const Message = ({ message, newUser }) => {
       newMessages[newMessages.findIndex((x) => x.id === message.id)] = message;
       setMessages(newMessages);
       await axios.put(
-        `http://localhost:3001/channels/${channel.id}/messages/${message.id}/react`,
+        `${process.env.REACT_APP_API_URL}/channels/${channel.id}/messages/${message.id}/react`,
         { reactions: message.reactions }
       );
     } catch (err) {
@@ -233,7 +233,7 @@ const Message = ({ message, newUser }) => {
       newMessages[newMessages.findIndex((x) => x.id === message.id)] = message;
       setMessages(newMessages);
       await axios.put(
-        `http://localhost:3001/channels/${channel.id}/messages/${message.id}/react`,
+        `${process.env.REACT_APP_API_URL}/channels/${channel.id}/messages/${message.id}/react`,
         { reactions: message.reactions }
       );
     } catch (err) {
@@ -243,7 +243,7 @@ const Message = ({ message, newUser }) => {
   const handleDeleteMessage = async () => {
     try {
       const { data: mess } = await axios.delete(
-        `http://localhost:3001/channels/${channel.id}/messages/${message.id}`
+        `${process.env.REACT_APP_API_URL}/channels/${channel.id}/messages/${message.id}`
       );
       const newMessages = messages;
       newMessages[newMessages.findIndex((x) => x.id === message.id)] = mess;

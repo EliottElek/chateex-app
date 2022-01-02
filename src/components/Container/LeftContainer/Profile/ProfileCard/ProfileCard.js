@@ -108,7 +108,7 @@ export default function ProfileCard() {
       removeCookie("visited");
       setOauth(null);
       onUser(null);
-      await axios.delete(`http://localhost:3001/users/${user.id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/users/${user.id}`);
       setSnackBarMessage({
         success: true,
         message: "Your account has been deleted successfully.",
@@ -130,7 +130,7 @@ export default function ProfileCard() {
         .then(async (result) => {
           try {
             user.avatarUrl = result;
-            await axios.put(`http://localhost:3001/users/${user.id}`, {
+            await axios.put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, {
               user: user,
             });
             onUser(user);
@@ -168,7 +168,7 @@ export default function ProfileCard() {
   const handleChangeAvatar = async (avatar) => {
     try {
       user.avatarUrl = avatar.url;
-      await axios.put(`http://localhost:3001/users/${user.id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, {
         user: user,
       });
       onUser(user);
@@ -191,7 +191,7 @@ export default function ProfileCard() {
     try {
       user.firstname = firstname;
       user.lastname = lastname;
-      await axios.put(`http://localhost:3001/users/${user.id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, {
         user: user,
       });
       onUser(user);
@@ -214,7 +214,7 @@ export default function ProfileCard() {
     try {
       user.color = color;
       user.theme = image;
-      await axios.put(`http://localhost:3001/users/${user.id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, {
         user: user,
       });
       onUser(user);

@@ -133,7 +133,7 @@ const Channels = () => {
   };
   const fetchUsers = async () => {
     try {
-      const { data: usrs } = await axios.get("http://localhost:3001/users");
+      const { data: usrs } = await axios.get(`${process.env.REACT_APP_API_URL}/users`);
       var usersFiltered = usrs.filter(function (u) {
         return u.id !== user.id;
       });
@@ -174,7 +174,7 @@ const Channels = () => {
       };
       //first, we create the channel
       try {
-        await axios.post(`http://localhost:3001/channels/`, channel);
+        await axios.post(`${process.env.REACT_APP_API_URL}/channels/`, channel);
         addChannel(channel);
         setMembers([]);
         setChannelName("");
@@ -189,7 +189,7 @@ const Channels = () => {
       try {
         const newUser = user;
         newUser.channelsList.push(channel.id);
-        await axios.put(`http://localhost:3001/users/${user.id}`, {
+        await axios.put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, {
           user: newUser,
         });
         onUser(newUser);
@@ -198,7 +198,7 @@ const Channels = () => {
       }
       try {
         userto.channelsList.push(channel.id);
-        await axios.put(`http://localhost:3001/users/${userto.id}`, {
+        await axios.put(`${process.env.REACT_APP_API_URL}/users/${userto.id}`, {
           user: userto,
         });
         setSnackBarMessage({
@@ -231,7 +231,7 @@ const Channels = () => {
     newUser.channelsList.push(channel.id);
     //first, we create the channel
     try {
-      await axios.post(`http://localhost:3001/channels/`, channel);
+      await axios.post(`${process.env.REACT_APP_API_URL}/channels/`, channel);
     } catch (err) {
       setSnackBarMessage({
         success: false,
@@ -242,7 +242,7 @@ const Channels = () => {
     }
     //then, we add thee channel to user's channel list
     try {
-      await axios.put(`http://localhost:3001/users/${user.id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, {
         user: newUser,
       });
     } catch (e) {
@@ -257,7 +257,7 @@ const Channels = () => {
       try {
         selectedMembers[i].channelsList.push(channel.id);
         await axios.put(
-          `http://localhost:3001/users/${selectedMembers[i].id}`,
+          `${process.env.REACT_APP_API_URL}/users/${selectedMembers[i].id}`,
           {
             user: selectedMembers[i],
           }
