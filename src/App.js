@@ -39,7 +39,7 @@ const ENDPOINT = process.env.REACT_APP_API_URL;
 const styles = {
   root: {
     width: "100%",
-    height: "100vh",
+    height: "calc(100vh - calc(100vh-100%))",
     padding: 0,
     margin: 0,
   },
