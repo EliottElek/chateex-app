@@ -1,0 +1,14 @@
+.message:hover {
+  background-color: rgba(0,0,0,0.3) !important;
+}
+.MuiPopover-paper {
+  background-color: rgba(0,0,0,0.3)!important;
+}
+.name {
+  background-image: linear-gradient(to right, #a239c9, #6600ff);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}

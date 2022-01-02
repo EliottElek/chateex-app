@@ -1,0 +1,10 @@
+img[src~="media"] {
+  width: 150px;
+  height: 100px;
+}
+img[alt="Gif"] {
+  width: 200px;
+}
+img[alt="Media"] {
+  width: 200px;
+}

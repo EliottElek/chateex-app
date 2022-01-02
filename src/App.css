@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif !important;
+  scroll-behavior: smooth;
+}
+body {
+  overflow-y: hidden;
+}
+img[src~="#gif"] {
+  width: 350px!important;
+  height: 100px!important;
+}
+.App {
+  color: #fff;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 20px;
+  margin: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(165, 164, 164, 0.36);
+  border-radius: 20px;
+}
+.css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root {
+  background-color: #bdbdbd !important;
+  border-radius: 4px !important;
+}
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root {
+  background-color: #bdbdbd !important;
+}
+.App {
+  background-size: cover!important;
+  z-index: 0;
+  backdrop-filter: blur(10px) !important;
+}
+.css-1160xiw-MuiPaper-root-MuiDrawer-paper {
+  background-color: rgba(0, 0, 0, 0.8)!important;
+}
+.react-colorful {
+  height: 3Ò00px!important;
+}
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  background: rgba(0,0,0,0.8);
+}
