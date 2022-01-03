@@ -4,10 +4,12 @@ import Drawer from "@mui/material/Drawer";
 import LeftContainer from "../LeftContainer/LeftContainer";
 import Channel from "../Channel/Channel";
 import { Context } from "../../Context/Context";
+import { useParams } from "react-router";
 
 const drawerWidth = 270;
 
 const Main = (props) => {
+  const { id } = useParams();
   const { window } = props;
   const { mobileOpen, setMobileOpen, image } = React.useContext(Context);
   const handleDrawerToggle = () => {
@@ -21,7 +23,7 @@ const Main = (props) => {
     <Box
       style={{ background: "transparent!important" }}
       sx={{
-        bgcolor:'transparent!important',
+        bgcolor: "transparent!important",
         height: "100%",
         width: "100%",
         display: "flex",
@@ -30,7 +32,7 @@ const Main = (props) => {
       <Box
         style={{ background: "transparent!important" }}
         sx={{
-          bgcolor:'transparent!important',
+          bgcolor: "transparent!important",
           maxHeight: "100%",
           width: { sm: drawerWidth },
           flexShrink: { sm: 0 },
@@ -46,13 +48,16 @@ const Main = (props) => {
           }}
           style={{ background: "transparent!important" }}
           sx={{
-            bgcolor:'transparent!important',
+            bgcolor: "transparent!important",
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               border: "none",
               width: { xs: "100%", sm: 350 },
-              bgcolor: { xs: "rgba(0,0,0,1)",  sm: image ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)" },
+              bgcolor: {
+                xs: "rgba(0,0,0,1)",
+                sm: image ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)",
+              },
             },
           }}
         >
@@ -63,22 +68,35 @@ const Main = (props) => {
           open
           style={{ background: "transparent!important" }}
           sx={{
-            bgcolor:'transparent!important',
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               border: "none",
               width: drawerWidth,
-              bgcolor: { xs: "rgba(0,0,0,1)",  sm: image ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)" },
+              bgcolor: {
+                xs: "rgba(0,0,0,1)",
+                sm: image ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)",
+              },
             },
           }}
         >
           <LeftContainer />
         </Drawer>
       </Box>
-      <Box sx={{ width: "100%" }}>
+      <Box style={{ width: "100%" }}>
         <Channel handleDrawerToggle={handleDrawerToggle} />
       </Box>
+      {id && (
+        <Box
+          style={{ background: "transparent!important" }}
+          sx={{
+            bgcolor: "transparent!important",
+            maxHeight: "100%",
+            width: { sm: 0, md: 310 },
+            flexShrink: { sm: 0 },
+          }}
+        ></Box>
+      )}
     </Box>
   );
 };

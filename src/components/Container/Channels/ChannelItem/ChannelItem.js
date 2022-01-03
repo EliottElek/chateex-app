@@ -80,6 +80,7 @@ const ChannelItem = ({ channel, clearInput, search, unread }) => {
   id === channel.id && setOpen();
   return (
     <ListItemButton
+    sx = {{height : {xs : "80px", sm : "auto"}}}
       className="hover"
       style={id === channel.id ? styles.rootActive : styles.root}
       key={channel.id}
