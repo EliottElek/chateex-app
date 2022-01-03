@@ -29,6 +29,8 @@ import DragnDrop from "../MessageForm/DragnDrop";
 import StyledAvatar from "../../../StyledAvatar/StyledAvatar";
 import getBase64 from "../../../../functions/dist/base64";
 import shortString from "../../../../functions/string";
+import { useParams } from "react-router";
+
 const styles = {
   root: {
     background: "transparent!important",
@@ -89,6 +91,7 @@ export default function SwipeableTemporaryDrawer({
   openDrawer,
   setOpenDrawer,
 }) {
+  console.log(openDrawer);
   const {
     removeChannel,
     setChannel,
@@ -101,10 +104,12 @@ export default function SwipeableTemporaryDrawer({
     channels,
     setOpenSnack,
     setCookie,
+    image,
   } = React.useContext(Context);
   const onFileChange = (file) => {
     setFile(file);
   };
+  const { id } = useParams();
   const [file, setFile] = React.useState(null);
   const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
   const [openLeaveModal, setOpenLeaveModal] = React.useState(false);
@@ -156,9 +161,12 @@ export default function SwipeableTemporaryDrawer({
           return u !== channel.id;
         });
         newUser.channelsList = newList;
-        await axios.put(`${process.env.REACT_APP_API_URL}/users/${newUser.id}`, {
-          user: newUser,
-        });
+        await axios.put(
+          `${process.env.REACT_APP_API_URL}/users/${newUser.id}`,
+          {
+            user: newUser,
+          }
+        );
         console.log(
           `Successfully removed ${channel.name} from ${newUser.firstname}`
         );
@@ -203,9 +211,12 @@ export default function SwipeableTemporaryDrawer({
     try {
       if (file) channel.avatarUrl = file;
       channel.name = name;
-      await axios.put(`${process.env.REACT_APP_API_URL}/channels/${channel.id}`, {
-        channel: channel,
-      });
+      await axios.put(
+        `${process.env.REACT_APP_API_URL}/channels/${channel.id}`,
+        {
+          channel: channel,
+        }
+      );
       setChannel(channel);
       setSnackBarMessage({
         success: true,
@@ -284,11 +295,11 @@ export default function SwipeableTemporaryDrawer({
   const list = () => (
     <Box
       sx={{
+        bgcolor: "transparent!important",
         color: "#fefefe",
-        bgcolor: "rgba(0,0,0,0.8)",
         flexGrow: 1,
         overflowY: "scroll",
-        width: { xs: "100%", sm: 350 },
+        width: { xs: "100%", sm: 310 },
       }}
       onKeyDown={() => setOpenDrawer(false)}
     >
@@ -519,24 +530,10 @@ export default function SwipeableTemporaryDrawer({
                 </ListItemIcon>
                 <ListItemText primary={"Add a new member"} />
               </ListItem>
-              {/* <ListItem
-                button
-                key={"manageAccess"}
-                alignItems="center"
-                sx={{
-                  bgcolor: "#2e3136",
-                  color: "#bdbdbd",
-                  marginTop: "2px",
-                }}
-              >
-                <ListItemIcon>
-                  <SupervisorAccountIcon sx={{ color: "#bdbdbd" }} />
-                </ListItemIcon>
-                <ListItemText primary={"Manage access"} />
-              </ListItem> */}
             </>
           )}
         </List>
+        <div style={{ flexGrow: 1 }} />
         <Divider style={{ color: "red" }} variant="middle">
           DANGER ZONE
         </Divider>
@@ -613,7 +610,7 @@ export default function SwipeableTemporaryDrawer({
                 <ListItemIcon>
                   <DeleteForeverIcon sx={{ color: "red" }} />
                 </ListItemIcon>
-                <ListItemText primary={"Delete this private conversation"} />
+                <ListItemText primary={"Delete this conversation"} />
               </ListItem>
             </>
           )}
@@ -624,16 +621,58 @@ export default function SwipeableTemporaryDrawer({
 
   return (
     <>
-      <Drawer
-        ModalProps={{
-          keepMounted: true,
-        }}
-        anchor={"right"}
-        open={openDrawer}
-        onClose={() => setOpenDrawer(false)}
-      >
-        {list()}
-      </Drawer>
+      {id && (
+        <>
+          <Drawer
+            // ModalProps={{
+            //   keepMounted: true,
+            // }}
+            style={{ background: "transparent!important" }}
+            sx={{
+              bgcolor: "transparent!important",
+              display: { xs: "none", sm: "none", md: "block" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                border: "none",
+                bgcolor: {
+                  xs: "rgba(0,0,0,1)",
+                  sm: image ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)",
+                },
+              },
+            }}
+            variant="permanent"
+            anchor={"right"}
+            open
+          >
+            {list()}
+          </Drawer>
+          <Drawer
+            style={{ background: "transparent!important" }}
+            ModalProps={{
+              keepMounted: true,
+            }}
+            sx={{
+              width: "100%",
+              bgcolor: "transparent!important",
+              display: { sm: "block", md: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                border: "none",
+                bgcolor: {
+                  xs: "rgba(0,0,0,1)",
+                  sm: image ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)",
+                },
+              },
+            }}
+            variant="temporary"
+            anchor={"right"}
+            open={openDrawer}
+            onClose={() => setOpenDrawer(false)}
+          >
+            {list()}
+          </Drawer>
+        </>
+      )}
       <Modal
         open={openDeleteModal}
         onClose={() => setOpenDeleteModal(false)}

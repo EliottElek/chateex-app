@@ -118,7 +118,9 @@ const AppBar = ({ handleDrawerToggle }) => {
   }
   const fetchUsers = async () => {
     try {
-      const { data: usrs } = await axios.get(`${process.env.REACT_APP_API_URL}/users`);
+      const { data: usrs } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users`
+      );
       var usersFiltered = usrs.filter(function (u) {
         return u.id !== user.id;
       });
@@ -134,9 +136,12 @@ const AppBar = ({ handleDrawerToggle }) => {
       const selectedMembersIds = selectedMembers.map((a) => a.id);
       addMembers([...channel.members, selectedMembersIds]);
       setMembers([...members, selectedMembers]);
-      await axios.put(`${process.env.REACT_APP_API_URL}/channels/${channel.id}`, {
-        channel: channel,
-      });
+      await axios.put(
+        `${process.env.REACT_APP_API_URL}/channels/${channel.id}`,
+        {
+          channel: channel,
+        }
+      );
     } catch (err) {
       console.error(err);
     }
@@ -208,6 +213,7 @@ const AppBar = ({ handleDrawerToggle }) => {
           </IconButton>
           {channel.name && (
             <IconButton
+              sx={{ display: { sm: "block", md: "none" } }}
               onClick={() => {
                 setOpenDrawer(true);
               }}
