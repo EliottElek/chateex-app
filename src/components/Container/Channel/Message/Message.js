@@ -448,7 +448,7 @@ const Message = ({ message, newUser }) => {
         id={id}
         open={open}
         anchorEl={anchorEl}
-        style={{ marginLeft: "-120px" }}
+        sx={{ marginLeft: { sm: "-120px", xs: "0px" }}}
         onClose={handlePopoverClose}
         anchorOrigin={{
           vertical: "top",

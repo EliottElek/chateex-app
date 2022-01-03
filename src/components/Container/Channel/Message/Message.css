@@ -12,3 +12,6 @@
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 }
+.MuiPopover-paper {
+  background-color: rgba(0,0,0,0.9)!important; 
+}
