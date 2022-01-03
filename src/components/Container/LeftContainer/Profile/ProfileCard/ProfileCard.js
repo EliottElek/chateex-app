@@ -124,7 +124,6 @@ export default function ProfileCard() {
     }
   };
   const onFileSubmit = () => {
-    console.log(file[0]);
     try {
       getBase64(file[0])
         .then(async (result) => {

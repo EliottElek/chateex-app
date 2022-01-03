@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif !important;
-  scroll-behavior: smooth;
+ /* scroll-behavior: smooth; */
 }
 body {
   overflow-y: hidden;

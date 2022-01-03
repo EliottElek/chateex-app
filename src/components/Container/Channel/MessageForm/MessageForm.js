@@ -69,7 +69,6 @@ const MessageForm = () => {
   const [files, setFiles] = useState([]);
   const onFileChange = (files) => {
     setFiles(files);
-    console.log(files);
   };
   const onFileSubmit = () => {
     try {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import axios from "axios";
 import { CircularProgress, List, Typography } from "@mui/material";
 import MessageForm from "./MessageForm/MessageForm";
@@ -46,6 +46,7 @@ const Channel = ({ handleDrawerToggle }) => {
   const { id } = useParams();
   const { messages, channel, user, channels, setChannel, setMembers, members } =
     useContext(Context);
+  const messagesEndRef = useRef(null);
   useEffect(() => {
     const fetch = async () => {
       const chann = channels.find((c) => c.id === id);
@@ -69,6 +70,10 @@ const Channel = ({ handleDrawerToggle }) => {
     };
     if (members.length === 0 && id && id !== "undefined") fetchMembers();
   }, [id, setMembers, members]);
+
+  useEffect(() => {
+    return messagesEndRef.current?.scrollIntoView();
+  }, [messages]);
   return (
     <div style={styles.grid}>
       <div style={styles.header}>
@@ -162,8 +167,9 @@ const Channel = ({ handleDrawerToggle }) => {
                 ))}
               </List>
             )}
+            <div ref={messagesEndRef} />
           </div>
-          <div style={{ width: "100%" }} >
+          <div style={{ width: "100%" }}>
             <MessageForm />
           </div>
         </>

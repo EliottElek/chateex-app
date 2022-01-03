@@ -104,7 +104,6 @@ export default function SwipeableTemporaryDrawer({
   } = React.useContext(Context);
   const onFileChange = (file) => {
     setFile(file);
-    console.log(file);
   };
   const [file, setFile] = React.useState(null);
   const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
@@ -179,7 +178,6 @@ export default function SwipeableTemporaryDrawer({
     setOpenSnack(true);
   };
   const onFileSubmit = () => {
-    console.log(file[0]);
     try {
       getBase64(file[0])
         .then(async (result) => {

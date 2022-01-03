@@ -229,12 +229,10 @@ const SignUp = () => {
           `${process.env.REACT_APP_API_URL}/users`,
           userToAdd
         );
-        console.log(res);
         if (res.data.create === false) {
           setEmptyEmailMessage(res.data.message);
         } else {
           setEmptyEmailMessage("all good");
-          console.log(res.data.user.email);
           setCookie("oauth", {
             openid: false,
             id_token: res.data.token,
