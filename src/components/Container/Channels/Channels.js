@@ -304,56 +304,37 @@ const Channels = () => {
 
   return (
     <>
-      {channels.length === 0 ? (
-        <div style={styles.root}>
+      <div style={styles.root}>
+        <ListItem sx={styles.channels} key="channels">
+          <Typography>Channels</Typography>
+          <IconButton onClick={handleOpenModal}>
+            <AddIcon style={styles.add} />
+          </IconButton>
+        </ListItem>
+        {!channels.length ? (
           <ListItem
             sx={styles.channelsLoading}
             key="channelsLoading"
             secondaryAction={
-              <Button
-                style={{ width: 30, height: 30 }}
-                onClick={handleOpenModal}
-              >
-                new
-              </Button>
+              <CircularProgress style={{ width: 30, height: 30 }} />
             }
           >
-            <Typography>No channel yet.</Typography>
+            <Typography>Loading...</Typography>
           </ListItem>
-        </div>
-      ) : (
-        <div style={styles.root}>
-          <ListItem sx={styles.channels} key="channels">
-            <Typography>Channels</Typography>
-            <IconButton onClick={handleOpenModal}>
-              <AddIcon style={styles.add} />
-            </IconButton>
-          </ListItem>
-          {!channels.length ? (
-            <ListItem
-              sx={styles.channelsLoading}
-              key="channelsLoading"
-              secondaryAction={
-                <CircularProgress style={{ width: 30, height: 30 }} />
-              }
-            >
-              <Typography>Loading...</Typography>
-            </ListItem>
-          ) : (
-            <List sx={styles.listChannels}>
-              {channels?.map((channel, i) => (
-                <div key={i}>
-                  {channel.unread ? (
-                    <ChannelItem key={channel.id} channel={channel} unread />
-                  ) : (
-                    <ChannelItem key={channel.id + 1} channel={channel} />
-                  )}
-                </div>
-              ))}
-            </List>
-          )}
-        </div>
-      )}
+        ) : (
+          <List sx={styles.listChannels}>
+            {channels?.map((channel, i) => (
+              <div key={i}>
+                {channel.unread ? (
+                  <ChannelItem key={channel.id} channel={channel} unread />
+                ) : (
+                  <ChannelItem key={channel.id + 1} channel={channel} />
+                )}
+              </div>
+            ))}
+          </List>
+        )}
+      </div>
       <Modal handleClose={handleCloseModal} open={open}>
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>

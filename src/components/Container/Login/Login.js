@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import { Context } from "../../Context/Context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 const styles = {
   root: {
@@ -129,6 +129,7 @@ const Login = ({ redirect }) => {
     setOpenSnack,
     setChannel,
     image,
+    user,
     setImage,
     setColor,
   } = useContext(Context);
@@ -159,13 +160,16 @@ const Login = ({ redirect }) => {
         setEmptyPassMessage("- Please enter your password.");
       }
       if (password !== "" && email !== "") {
-        const { data: resp } = await axios.post(`${process.env.REACT_APP_API_URL}/login`, {
-          email: email,
-          password: password,
-        });
+        const { data: resp } = await axios.post(
+          `${process.env.REACT_APP_API_URL}/login`,
+          {
+            email: email,
+            password: password,
+          }
+        );
         if (resp.auth && resp.user) {
           setCookie("oauth", {
-            openid : false,
+            openid: false,
             id_token: resp.token,
             access_token: resp.token,
             email: resp.user.email,
@@ -190,6 +194,9 @@ const Login = ({ redirect }) => {
       setOpenSnack(true);
     }
   };
+  if (user) {
+    return <Navigate to="/channels" />;
+  }
   return (
     <div style={styles.root}>
       <Card

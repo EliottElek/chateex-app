@@ -5,7 +5,7 @@ import axios from "axios";
 import "./App.css";
 import { IconButton } from "@mui/material";
 import Main from "./components/Container/Main/Main";
-import Login from "./components/Container/Login/Oauth";
+import Login from "./components/Container/Login/Login";
 import SignUp from "./components/Container/SignUp/SignUp";
 import Landing from "./components/Landing/Landing";
 import Snackbar from "@mui/material/Snackbar";
@@ -17,7 +17,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import icon from "./assets/icon.png";
 import io from "socket.io-client";
-import { useLocation } from "react-router";
 import notificationIcon from "./assets/iconNew.png";
 
 export const sendMessage = (message) => {
@@ -287,13 +286,10 @@ const App = () => {
     </div>
   );
 };
-
 function RequireAuth({ children }) {
   let { user } = useContext(Context);
-  let location = useLocation();
-
   if (!user) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to="/login" />;
   }
   return children;
 }
