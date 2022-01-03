@@ -91,7 +91,6 @@ export default function SwipeableTemporaryDrawer({
   openDrawer,
   setOpenDrawer,
 }) {
-  console.log(openDrawer);
   const {
     removeChannel,
     setChannel,
