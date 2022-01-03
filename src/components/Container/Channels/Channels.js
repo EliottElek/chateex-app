@@ -50,8 +50,8 @@ const styles = {
     borderBottom: "solid 0.2px rgb(66, 69, 74)",
   },
   channelsLoading: {
-    margin:0,
-    height : "60px",
+    margin: 0,
+    height: "60px",
     color: "#fefefe",
   },
   add: {
@@ -301,34 +301,58 @@ const Channels = () => {
       setOpenSnack(true);
     }, 500);
   };
+
   return (
-    <div style={styles.root}>
-      <ListItem sx={styles.channels} key="channels">
-        <Typography>Channels</Typography>
-        <IconButton onClick={handleOpenModal}>
-          <AddIcon style={styles.add} />
-        </IconButton>
-      </ListItem>
-      {!channels.length ? (
-        <ListItem
-          sx={styles.channelsLoading}
-          key="channelsLoading"
-          secondaryAction={<CircularProgress style={{width:30, height : 30}}/>}
-        >
-          <Typography>Loading...</Typography>
-        </ListItem>
+    <>
+      {channels.length === 0 ? (
+        <div style={styles.root}>
+          <ListItem
+            sx={styles.channelsLoading}
+            key="channelsLoading"
+            secondaryAction={
+              <Button
+                style={{ width: 30, height: 30 }}
+                onClick={handleOpenModal}
+              >
+                new
+              </Button>
+            }
+          >
+            <Typography>No channel yet.</Typography>
+          </ListItem>
+        </div>
       ) : (
-        <List sx={styles.listChannels}>
-          {channels?.map((channel, i) => (
-            <div key={i}>
-              {channel.unread ? (
-                <ChannelItem key={channel.id} channel={channel} unread />
-              ) : (
-                <ChannelItem key={channel.id + 1} channel={channel} />
-              )}
-            </div>
-          ))}
-        </List>
+        <div style={styles.root}>
+          <ListItem sx={styles.channels} key="channels">
+            <Typography>Channels</Typography>
+            <IconButton onClick={handleOpenModal}>
+              <AddIcon style={styles.add} />
+            </IconButton>
+          </ListItem>
+          {!channels.length ? (
+            <ListItem
+              sx={styles.channelsLoading}
+              key="channelsLoading"
+              secondaryAction={
+                <CircularProgress style={{ width: 30, height: 30 }} />
+              }
+            >
+              <Typography>Loading...</Typography>
+            </ListItem>
+          ) : (
+            <List sx={styles.listChannels}>
+              {channels?.map((channel, i) => (
+                <div key={i}>
+                  {channel.unread ? (
+                    <ChannelItem key={channel.id} channel={channel} unread />
+                  ) : (
+                    <ChannelItem key={channel.id + 1} channel={channel} />
+                  )}
+                </div>
+              ))}
+            </List>
+          )}
+        </div>
       )}
       <Modal handleClose={handleCloseModal} open={open}>
         <Box sx={{ width: "100%", typography: "body1" }}>
@@ -401,7 +425,9 @@ const Channels = () => {
                                   edge="end"
                                   onChange={handleToggle(user)}
                                   checked={checked.indexOf(user) !== -1}
-                                  inputProps={{ "aria-labelledby": labelId }}
+                                  inputProps={{
+                                    "aria-labelledby": labelId,
+                                  }}
                                 />
                               }
                             >
@@ -498,7 +524,7 @@ const Channels = () => {
           </Typography>
         </div>
       </Backdrop>
-    </div>
+    </>
   );
 };
 

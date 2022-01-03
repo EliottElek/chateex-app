@@ -43,5 +43,17 @@ const themes = [
     name: "theme 6",
     url: "https://cdn.wallpapersafari.com/52/57/ljuWD8.jpg",
   },
+  {
+    name: "sea 1",
+    url: "https://images.unsplash.com/photo-1530053969600-caed2596d242?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5kZXJ3YXRlcnxlbnwwfHwwfHw%3D&w=1000&q=80",
+  },
+  {
+    name: "sea 2",
+    url: "https://cdn.wallpapersafari.com/56/68/QuMcN2.jpg",
+  },
+  {
+    name: "sea 3",
+    url: "https://eskipaper.com/images/calm-wallpaper-5.jpg",
+  },
 ];
 export default themes;
